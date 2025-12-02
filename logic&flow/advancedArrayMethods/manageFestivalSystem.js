@@ -1,6 +1,6 @@
 /* Challenge
 
-You will be creating a Movie Festival Management System. Start by initializing the system with the provided data and creating the main function structure.
+1.You will be creating a Movie Festival Management System. Start by initializing the system with the provided data and creating the main function structure.
 
 Create a variable called festivalData with this exact initial data:
 
@@ -44,7 +44,37 @@ listVenues: adds festivalData.venues to results array
 listTickets: adds festivalData.tickets to the results array
 listScreenings: adds festivalData.screenings to the results array
 default: adds "Invalid action!" to results array
-Return the results array */
+Return the results array 
+
+2.Add two new cases to your switch statement: addMovie and addVenue.
+
+For addMovie, the data parameter contains:
+
+title (string)
+director (string)
+year (number)
+mainGenre (string)
+secondGenre (string)
+The function should:
+
+Create a new movie object with:
+id: generate by adding 1 to the length of movies array
+title, director, year, and mainGenre, secondGenre from the data
+avgRating: 0
+available: true
+Add the movie to festivalData.movies array
+Add Movie added successfully! to results array
+For addVenue, the data parameter contains:
+
+name (string)
+capacity (number)
+The function should:
+
+Create a new venue object with:
+id: generate by adding 1 to the length of venues array
+name and capacity from the data
+Add the venue to festivalData.venues array
+Add Venue added successfully! to results array */
 
 const festivalData = {
   movies: [
@@ -101,6 +131,35 @@ function manageFestival(actions, data) {
       case 'listScreenings':
         // Write your code here
         results.push(festivalData.screenings);
+        break;
+      case 'addMovie':
+        // Write your code here
+        const newMovie = {
+          id: festivalData.movies.length + 1,
+          title: currentData.title,
+          director: currentData.director,
+          year: currentData.year,
+          mainGenre: currentData.mainGenre,
+          secondGenre: currentData.secondGenre,
+          avgRating: 0,
+          available: true,
+        };
+
+        festivalData.movies.push(newMovie);
+
+        results.push('Movie added successfully!');
+        break;
+      case 'addVenue':
+        // Write your code here
+        const newVenue = {
+          id: festivalData.venues.length + 1,
+          name: currentData.name,
+          capacity: currentData.capacity,
+        };
+
+        festivalData.venues.push(newVenue);
+
+        results.push('Venue added successfully!');
         break;
       default:
         results.push('Invalid action!');
