@@ -74,7 +74,26 @@ Create a new venue object with:
 id: generate by adding 1 to the length of venues array
 name and capacity from the data
 Add the venue to festivalData.venues array
-Add Venue added successfully! to results array */
+Add Venue added successfully! to results array 
+
+3.Add a new test case to your switch statement: addScreening.
+
+For addScreening the data parameters contains:
+
+movieId (number)
+venueId (number)
+date (string in 'YYYY-MM-DD' format)
+time (string in 'HH:MM:SS' format)
+The function should:
+
+Validate if movie and venue exist
+Check if there's no screening at the same venue, date and time
+Create a new screening object with:
+id: generate by adding 1 to the length of screening array
+movieId, venueId, date, and time from the data
+availableSeats: equal to venue's capacity
+Add the screening to festivalData.screenings array
+Add Screening added successfully! to results array */
 
 const festivalData = {
   movies: [
@@ -160,6 +179,32 @@ function manageFestival(actions, data) {
         festivalData.venues.push(newVenue);
 
         results.push('Venue added successfully!');
+        break;
+      case 'addScreening':
+        const movie = festivalData.movies.find(m => m.id === currentData.movieId);
+        const venue = festivalData.venues.find(v => v.id === currentData.venueId);
+        const conflict = festivalData.screenings.some(
+          s => s.venueId === currentData.venueId && s.date === currentData.date && s.time === currentData.time
+        );
+
+        if (movie && venue && !conflict) {
+          const newScreening = {
+            id: festivalData.screenings.length + 1,
+            movieId: currentData.movieId,
+            venueId: currentData.venueId,
+            date: currentData.date,
+            time: currentData.time,
+            availableSeats: venue.capacity,
+          };
+
+          festivalData.screenings.push(newScreening);
+
+          results.push('Screening added successfully!');
+        }
+
+        if (!movie || !venue) results.push('Movie or venue not found!');
+        else if (conflict) results.push('Screening already exists at this time!');
+
         break;
       default:
         results.push('Invalid action!');
