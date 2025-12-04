@@ -93,7 +93,26 @@ id: generate by adding 1 to the length of screening array
 movieId, venueId, date, and time from the data
 availableSeats: equal to venue's capacity
 Add the screening to festivalData.screenings array
-Add Screening added successfully! to results array */
+Add Screening added successfully! to results array 
+
+4.Add case buyTicket that handles ticket purchases. The data parameter contains:
+
+screeningId (number)
+quantity (number)
+The function should:
+
+Check if screening exists and has enough available seats
+If not found, add Screening not found! to results array
+If not enough seats, add Not enough seats available! to results array
+Create ticket IDs following this exact format:
+For each ticket, create ID as: ${screeningId}-${currentAvailableSeats}
+Example: If screeningId is 1 and availableSeats is 200, and quantity is 2:
+First ticket ID will be "1-200"
+Second ticket ID will be "1-199"
+Add each ticket ID to festivalData.tickets Set
+Subtract quantity from screening's availableSeats
+Add Tickets purchased successfully! to results array
+*/
 
 const festivalData = {
   movies: [
@@ -205,6 +224,30 @@ function manageFestival(actions, data) {
         if (!movie || !venue) results.push('Movie or venue not found!');
         else if (conflict) results.push('Screening already exists at this time!');
 
+        break;
+      case 'buyTicket':
+        const screening = festivalData.screenings.find(s => s.id === currentData.screeningId);
+        if (!screening) {
+          results.push('Screening not found!');
+          break;
+        }
+
+        if (currentData.quantity > screening.availableSeats) {
+          results.push('Not enough seats available!');
+          break;
+        }
+
+        let currentAvailableSeats = screening.availableSeats;
+
+        for (let i = 1; i <= currentData.quantity; i++) {
+          const ticket = `${currentData.screeningId}-${currentAvailableSeats}`;
+          festivalData.tickets.add(ticket);
+          currentAvailableSeats--;
+        }
+
+        screening.availableSeats -= currentData.quantity;
+
+        results.push('Tickets purchased successfully!');
         break;
       default:
         results.push('Invalid action!');
