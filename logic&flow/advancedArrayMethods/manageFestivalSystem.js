@@ -112,6 +112,17 @@ Second ticket ID will be "1-199"
 Add each ticket ID to festivalData.tickets Set
 Subtract quantity from screening's availableSeats
 Add Tickets purchased successfully! to results array
+
+5.Add case rateMovie that handles movie ratings. The data parameter contains:
+
+movieId (number)
+avgRating (number between 1-5)
+
+The function should:
+
+Validate if movie exists
+Update movie's avgRating
+Add Rating added successfully! to results array
 */
 
 const festivalData = {
@@ -248,6 +259,23 @@ function manageFestival(actions, data) {
         screening.availableSeats -= currentData.quantity;
 
         results.push('Tickets purchased successfully!');
+        break;
+      case 'rateMovie':
+        const movieRating = festivalData.movies.find(m => m.id === currentData.movieId);
+
+        if (!movieRating) {
+          results.push('Movie not found!');
+          break;
+        }
+
+        if (currentData.avgRating > 5 || currentData.avgRating < 1) {
+          results.push('Invalid rating! Must be between 1 and 5');
+          break;
+        }
+
+        movieRating.avgRating = currentData.avgRating;
+
+        results.push('Rating added successfully!');
         break;
       default:
         results.push('Invalid action!');
