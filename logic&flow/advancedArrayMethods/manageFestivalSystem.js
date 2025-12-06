@@ -123,6 +123,16 @@ The function should:
 Validate if movie exists
 Update movie's avgRating
 Add Rating added successfully! to results array
+
+5.Add case cancelScreening that handles screening cancellations. The data parameter contains:
+
+screeningId (number)
+
+The function should:
+
+Find and remove screening from festivalData.screening array
+Remove all related tickets from festivalData.tickets Set
+Add Screening cancelled successfully! to results array
 */
 
 const festivalData = {
@@ -276,6 +286,22 @@ function manageFestival(actions, data) {
         movieRating.avgRating = currentData.avgRating;
 
         results.push('Rating added successfully!');
+        break;
+      case 'cancelScreening':
+        const screeningIndex = festivalData.screenings.findIndex(s => s.id === currentData.screeningId);
+
+        if (screeningIndex === -1) {
+          results.push('Screening not found!');
+          break;
+        }
+
+        festivalData.screenings.splice(screeningIndex, 1);
+
+        for (let ticket of festivalData.tickets) {
+          if (ticket.includes(currentData.screeningId)) festivalData.tickets.delete(ticket);
+        }
+
+        results.push('Screening cancelled successfully!');
         break;
       default:
         results.push('Invalid action!');
