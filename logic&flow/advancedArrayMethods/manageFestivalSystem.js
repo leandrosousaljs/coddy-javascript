@@ -124,7 +124,7 @@ Validate if movie exists
 Update movie's avgRating
 Add Rating added successfully! to results array
 
-5.Add case cancelScreening that handles screening cancellations. The data parameter contains:
+6.Add case cancelScreening that handles screening cancellations. The data parameter contains:
 
 screeningId (number)
 
