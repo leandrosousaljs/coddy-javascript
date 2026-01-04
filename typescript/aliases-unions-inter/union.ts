@@ -45,6 +45,6 @@ const formatOutput = (input: number | string): string => {
 };
 // TODO: Call the functions with the appropriate inputs and handle outputs
 
-printId(input1);
-console.log(processValue(input2));
-console.log(formatOutput(input3));
+printId(firstInput);
+console.log(processValue(secondInput));
+console.log(formatOutput(thirdInput));
