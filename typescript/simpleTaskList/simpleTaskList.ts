@@ -30,6 +30,33 @@ Call getTaskInfo with thirdTask and print the result
 Print the status of firstTask
 Print the title of secondTask
 
+2.You are provided with the following from the previous challenge:
+
+The Task interface with id (number), title (string), and status (literal type)
+Three task variables: firstTask, secondTask, and thirdTask
+The getTaskInfo function
+Create a function named addTask that takes two parameters:
+
+taskList of type Task[] (an array of Task objects)
+title of type string (the title for the new task)
+The function should:
+
+Create a new task with a unique ID (use the length of the current array + 1)
+Set the title to the provided title parameter
+Set the status to 'todo'
+Return a new array containing all existing tasks plus the new task
+Create an initial task list by creating a variable named initialTasks of type Task[] containing firstTask and secondTask.
+
+Use your addTask function to add a new task with the title "Review code changes" to initialTasks and store the result in a variable named updatedTasks.
+
+Print the following outputs on separate lines:
+
+Print the length of initialTasks
+Print the length of updatedTasks
+Call getTaskInfo with the last task in updatedTasks and print the result
+Print the title of the newly added task (the last task in updatedTasks)
+Print the status of the newly added task
+
 */
 
 // TODO: Write your code here
@@ -58,12 +85,29 @@ let thirdTask: Task = {
   title: 'Write unit tests',
   status: 'done',
 };
+
 // Create the getTaskInfo function
-const getTaskInfo = ({ id, title, status }: Task): string => `Task ${id}: ${title} - ${status}`;
+const getTaskInfo = ({ id, title, status }: Task): string => `Task ${id}: ${title} (${status})`;
+
+const addTask = (taskList: Task[], title: string): Task[] => {
+  let newTask: Task = {
+    id: taskList.length + 1,
+    title,
+    status: 'todo',
+  };
+
+  return [...taskList, newTask];
+};
+
+let initialTasks: Task[] = [firstTask, secondTask];
+
+const updatedTasks: Task[] = addTask(initialTasks, 'Review code changes');
+
+let lastTask: Task = updatedTasks[updatedTasks.length - 1];
 
 // Print the required outputs
-console.log(getTaskInfo(firstTask));
-console.log(getTaskInfo(secondTask));
-console.log(getTaskInfo(thirdTask));
-console.log(firstTask.status);
-console.log(secondTask.title);
+console.log(initialTasks.length);
+console.log(updatedTasks.length);
+console.log(getTaskInfo(lastTask));
+console.log(lastTask.title);
+console.log(lastTask.status);
