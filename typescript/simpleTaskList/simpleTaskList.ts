@@ -57,6 +57,38 @@ Call getTaskInfo with the last task in updatedTasks and print the result
 Print the title of the newly added task (the last task in updatedTasks)
 Print the status of the newly added task
 
+3.You are provided with the following from the previous challenge:
+
+The Task interface with id (number), title (string), and status (literal type)
+Three task variables: firstTask, secondTask, and thirdTask
+The getTaskInfo function
+The addTask function
+The initialTasks and updatedTasks arrays
+Create a function named changeTaskStatus that takes three parameters:
+
+taskList of type Task[] (an array of Task objects)
+taskId of type number (the ID of the task to update)
+newStatus of type 'todo' | 'in-progress' | 'done' (the new status for the task)
+The function should:
+
+Find the task with the matching ID in the task list
+Update that task's status to the new status
+Return a new array with the updated task (do not modify the original array)
+If no task with the given ID is found, return the original array unchanged
+Create a variable named testTasks of type Task[] containing firstTask, secondTask, and thirdTask.
+
+Use your changeTaskStatus function to:
+
+Change the status of task with ID 1 to 'in-progress' and store the result in progressTasks
+Change the status of task with ID 2 to 'done' in progressTasks and store the result in completedTasks
+Print the following outputs on separate lines:
+
+Call getTaskInfo with the first task from testTasks and print the result
+Call getTaskInfo with the first task from progressTasks and print the result
+Call getTaskInfo with the second task from completedTasks and print the result
+Print the status of the first task in testTasks
+Print the status of the second task in completedTasks
+
 */
 
 // TODO: Write your code here
@@ -70,13 +102,13 @@ interface Task {
 // Create the task variables
 let firstTask: Task = {
   id: 1,
-  title: 'Learn TypeScript interfaces',
+  title: 'Learn TypeScript basics',
   status: 'todo',
 };
 
 let secondTask: Task = {
   id: 2,
-  title: 'Build task management app',
+  title: 'Build a simple app',
   status: 'in-progress',
 };
 
@@ -86,8 +118,9 @@ let thirdTask: Task = {
   status: 'done',
 };
 
+let initialTasks: Task[] = [firstTask, secondTask];
 // Create the getTaskInfo function
-const getTaskInfo = ({ id, title, status }: Task): string => `Task ${id}: ${title} (${status})`;
+const getTaskInfo = ({ id, title, status }: Task): string => `Task ${id}: ${title} - Status: ${status}`;
 
 const addTask = (taskList: Task[], title: string): Task[] => {
   let newTask: Task = {
@@ -99,15 +132,23 @@ const addTask = (taskList: Task[], title: string): Task[] => {
   return [...taskList, newTask];
 };
 
-let initialTasks: Task[] = [firstTask, secondTask];
-
 const updatedTasks: Task[] = addTask(initialTasks, 'Review code changes');
 
 let lastTask: Task = updatedTasks[updatedTasks.length - 1];
 
+const changeTaskStatus = (taskList: Task[], taskId: number, newStatus: 'todo' | 'in-progress' | 'done'): Task[] => {
+  return taskList.map(task => (task.id === taskId ? { ...task, status: newStatus } : task));
+};
+
+const testTasks: Task[] = [firstTask, secondTask, thirdTask];
+
+const progressTasks: Task[] = changeTaskStatus(testTasks, 1, 'in-progress');
+
+const completedTasks: Task[] = changeTaskStatus(progressTasks, 2, 'done');
+
 // Print the required outputs
-console.log(initialTasks.length);
-console.log(updatedTasks.length);
-console.log(getTaskInfo(lastTask));
-console.log(lastTask.title);
-console.log(lastTask.status);
+console.log(getTaskInfo(testTasks[0]));
+console.log(getTaskInfo(progressTasks[0]));
+console.log(getTaskInfo(completedTasks[1]));
+console.log(testTasks[0].status);
+console.log(completedTasks[1].status);
