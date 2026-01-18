@@ -89,6 +89,39 @@ Call getTaskInfo with the second task from completedTasks and print the result
 Print the status of the first task in testTasks
 Print the status of the second task in completedTasks
 
+4.You are provided with the following from the previous challenge:
+
+The Task interface with id (number), title (string), and status (literal type)
+Three task variables: firstTask, secondTask, and thirdTask
+The getTaskInfo function
+The addTask function
+The changeTaskStatus function
+The initialTasks, updatedTasks, testTasks, progressTasks, and completedTasks arrays
+Create a function named listTasksByStatus that takes two parameters:
+
+taskList of type Task[] (an array of Task objects)
+status of type 'todo' | 'in-progress' | 'done' (the status to filter by)
+The function should:
+
+Use the array filter method to return a new array containing only tasks that match the specified status
+Return the filtered array of tasks
+Create a variable named mixedTasks of type Task[] containing all three original tasks: firstTask, secondTask, and thirdTask.
+
+Use your listTasksByStatus function to create the following filtered arrays:
+
+Filter mixedTasks for 'todo' status and store the result in todoTasks
+Filter mixedTasks for 'in-progress' status and store the result in inProgressTasks
+Filter mixedTasks for 'done' status and store the result in doneTasks
+Print the following outputs on separate lines:
+
+Print the length of mixedTasks
+Print the length of todoTasks
+Print the length of inProgressTasks
+Print the length of doneTasks
+Call getTaskInfo with the first task from todoTasks and print the result
+Call getTaskInfo with the first task from inProgressTasks and print the result
+Call getTaskInfo with the first task from doneTasks and print the result
+
 */
 
 // TODO: Write your code here
@@ -114,7 +147,7 @@ let secondTask: Task = {
 
 let thirdTask: Task = {
   id: 3,
-  title: 'Write unit tests',
+  title: 'Deploy to production',
   status: 'done',
 };
 
@@ -146,9 +179,20 @@ const progressTasks: Task[] = changeTaskStatus(testTasks, 1, 'in-progress');
 
 const completedTasks: Task[] = changeTaskStatus(progressTasks, 2, 'done');
 
+const listTaskByStatus = (taskList: Task[], status: 'todo' | 'in-progress' | 'done'): Task[] => {
+  return taskList.filter(task => task.status === status);
+};
+
+const mixedTasks: Task[] = [firstTask, secondTask, thirdTask];
+const todoTasks: Task[] = listTaskByStatus(mixedTasks, 'todo');
+const inProgressTasks: Task[] = listTaskByStatus(mixedTasks, 'in-progress');
+const doneTasks: Task[] = listTaskByStatus(mixedTasks, 'done');
+
 // Print the required outputs
-console.log(getTaskInfo(testTasks[0]));
-console.log(getTaskInfo(progressTasks[0]));
-console.log(getTaskInfo(completedTasks[1]));
-console.log(testTasks[0].status);
-console.log(completedTasks[1].status);
+console.log(mixedTasks.length);
+console.log(todoTasks.length);
+console.log(inProgressTasks.length);
+console.log(doneTasks.length);
+console.log(getTaskInfo(todoTasks[0]));
+console.log(getTaskInfo(inProgressTasks[0]));
+console.log(getTaskInfo(doneTasks[0]));
