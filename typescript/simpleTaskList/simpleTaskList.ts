@@ -122,6 +122,41 @@ Call getTaskInfo with the first task from todoTasks and print the result
 Call getTaskInfo with the first task from inProgressTasks and print the result
 Call getTaskInfo with the first task from doneTasks and print the result
 
+5.You are provided with the following from the previous challenge:
+
+The Task interface with id (number), title (string), and status (literal type)
+Three task variables: firstTask, secondTask, and thirdTask
+The getTaskInfo function
+The addTask function
+The changeTaskStatus function
+The listTasksByStatus function
+The initialTasks, updatedTasks, testTasks, progressTasks, completedTasks, mixedTasks, todoTasks, inProgressTasks, and doneTasks arrays
+Create a function named printTaskSummary that takes one parameter:
+
+task of type Task (a single Task object)
+The function should:
+
+Print a formatted summary to the console in the exact format: "ID: [id], Title: [title], Status: [status]"
+Have a return type of void
+Create a function named printAllTaskSummaries that takes one parameter:
+
+taskList of type Task[] (an array of Task objects)
+The function should:
+
+Use a loop to call printTaskSummary for each task in the array
+Have a return type of void
+Create a variable named sampleTasks of type Task[] containing the following tasks:
+
+A task with id 101, title "Design user interface", and status 'todo'
+A task with id 102, title "Implement authentication", and status 'in-progress'
+A task with id 103, title "Deploy to production", and status 'done'
+Print the following outputs:
+
+Call printTaskSummary with firstTask
+Call printTaskSummary with the second task from sampleTasks
+Call printAllTaskSummaries with sampleTasks
+Call printTaskSummary with the last task from doneTasks
+
 */
 
 // TODO: Write your code here
@@ -135,7 +170,7 @@ interface Task {
 // Create the task variables
 let firstTask: Task = {
   id: 1,
-  title: 'Learn TypeScript basics',
+  title: 'Learn TypeScript',
   status: 'todo',
 };
 
@@ -146,8 +181,8 @@ let secondTask: Task = {
 };
 
 let thirdTask: Task = {
-  id: 3,
-  title: 'Deploy to production',
+  id: 8,
+  title: 'Plan project',
   status: 'done',
 };
 
@@ -188,11 +223,35 @@ const todoTasks: Task[] = listTaskByStatus(mixedTasks, 'todo');
 const inProgressTasks: Task[] = listTaskByStatus(mixedTasks, 'in-progress');
 const doneTasks: Task[] = listTaskByStatus(mixedTasks, 'done');
 
+const printTaskSummary = (task: Task): void =>
+  console.log(`ID: ${task.id}, Title: ${task.title}, Status: ${task.status}`);
+
+const printAllTaskSummaries = (taskList: Task[]): void => {
+  for (const task of taskList) {
+    printTaskSummary(task);
+  }
+};
+
+const sampleTasks: Task[] = [
+  {
+    id: 101,
+    title: 'Design user interface',
+    status: 'todo',
+  },
+  {
+    id: 102,
+    title: 'Implement authentication',
+    status: 'in-progress',
+  },
+  {
+    id: 103,
+    title: 'Deploy to production',
+    status: 'done',
+  },
+];
+
 // Print the required outputs
-console.log(mixedTasks.length);
-console.log(todoTasks.length);
-console.log(inProgressTasks.length);
-console.log(doneTasks.length);
-console.log(getTaskInfo(todoTasks[0]));
-console.log(getTaskInfo(inProgressTasks[0]));
-console.log(getTaskInfo(doneTasks[0]));
+printTaskSummary(firstTask);
+printTaskSummary(sampleTasks[1]);
+printAllTaskSummaries(sampleTasks);
+printTaskSummary(doneTasks[doneTasks.length - 1]);
