@@ -157,6 +157,38 @@ Call printTaskSummary with the second task from sampleTasks
 Call printAllTaskSummaries with sampleTasks
 Call printTaskSummary with the last task from doneTasks
 
+6.You are provided with the following from the previous challenge:
+
+The Task interface with id (number), title (string), and status (literal type)
+Three task variables: firstTask, secondTask, and thirdTask
+The getTaskInfo function
+The addTask function
+The changeTaskStatus function
+The listTasksByStatus function
+The printTaskSummary function
+The printAllTaskSummaries function
+All task arrays: initialTasks, updatedTasks, testTasks, progressTasks, completedTasks, mixedTasks, todoTasks, inProgressTasks, doneTasks, and sampleTasks
+Create a comprehensive task management workflow that demonstrates all the functionality you've built:
+
+Create a variable named projectTasks of type Task[] containing these initial tasks:
+
+A task with id 201, title "Setup development environment", and status 'done'
+A task with id 202, title "Create project structure", and status 'todo'
+Perform the following operations in sequence:
+
+Use addTask to add a new task with title "Write documentation" to projectTasks and store the result in expandedTasks
+Use changeTaskStatus to change the status of task with ID 202 to 'in-progress' in expandedTasks and store the result in updatedProjectTasks
+Use changeTaskStatus to change the status of the newly added task (ID 3) to 'done' in updatedProjectTasks and store the result in finalTasks
+Use listTasksByStatus to filter finalTasks for 'done' status and store the result in completedProjectTasks
+Print the following outputs on separate lines:
+
+Print the length of projectTasks
+Print the length of finalTasks
+Print the length of completedProjectTasks
+Call printTaskSummary with the first task from completedProjectTasks
+Call printTaskSummary with the last task from completedProjectTasks
+Call printAllTaskSummaries with finalTasks
+
 */
 
 // TODO: Write your code here
@@ -214,14 +246,14 @@ const progressTasks: Task[] = changeTaskStatus(testTasks, 1, 'in-progress');
 
 const completedTasks: Task[] = changeTaskStatus(progressTasks, 2, 'done');
 
-const listTaskByStatus = (taskList: Task[], status: 'todo' | 'in-progress' | 'done'): Task[] => {
+const listTasksByStatus = (taskList: Task[], status: 'todo' | 'in-progress' | 'done'): Task[] => {
   return taskList.filter(task => task.status === status);
 };
 
 const mixedTasks: Task[] = [firstTask, secondTask, thirdTask];
-const todoTasks: Task[] = listTaskByStatus(mixedTasks, 'todo');
-const inProgressTasks: Task[] = listTaskByStatus(mixedTasks, 'in-progress');
-const doneTasks: Task[] = listTaskByStatus(mixedTasks, 'done');
+const todoTasks: Task[] = listTasksByStatus(mixedTasks, 'todo');
+const inProgressTasks: Task[] = listTasksByStatus(mixedTasks, 'in-progress');
+const doneTasks: Task[] = listTasksByStatus(mixedTasks, 'done');
 
 const printTaskSummary = (task: Task): void =>
   console.log(`ID: ${task.id}, Title: ${task.title}, Status: ${task.status}`);
@@ -250,8 +282,31 @@ const sampleTasks: Task[] = [
   },
 ];
 
+const projectTasks: Task[] = [
+  {
+    id: 201,
+    title: 'Setup development environment',
+    status: 'done',
+  },
+  {
+    id: 202,
+    title: 'Create project structure',
+    status: 'todo',
+  },
+];
+
+const expandedTasks: Task[] = addTask(projectTasks, 'Write documentation');
+
+const updatedProjectTasks: Task[] = changeTaskStatus(expandedTasks, 202, 'in-progress');
+
+const finalTasks: Task[] = changeTaskStatus(updatedProjectTasks, 3, 'done');
+
+const completedProjectTasks: Task[] = listTasksByStatus(finalTasks, 'done');
+
 // Print the required outputs
-printTaskSummary(firstTask);
-printTaskSummary(sampleTasks[1]);
-printAllTaskSummaries(sampleTasks);
-printTaskSummary(doneTasks[doneTasks.length - 1]);
+console.log(projectTasks.length);
+console.log(finalTasks.length);
+console.log(completedProjectTasks.length);
+printTaskSummary(completedProjectTasks[0]);
+printTaskSummary(completedProjectTasks[completedProjectTasks.length - 1]);
+printAllTaskSummaries(finalTasks);
