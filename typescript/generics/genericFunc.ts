@@ -23,9 +23,7 @@ Print the result of calling wrapInObject with the number 100, accessing the valu
 
 // TODO: Write your code here
 // Create the generic function wrapInObject
-function wrapInObject<T>(item: T): { value: T } {
-  return { value: item };
-}
+const wrapInObject = <T>(item: T): { value: T } => ({ value: item });
 // TODO: Create the test variables
 // wrappedString, wrappedNumber, wrappedBoolean
 const wrappedString = wrapInObject('Hello TypeScript');
