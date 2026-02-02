@@ -32,31 +32,32 @@ Print stringResult.data */
 
 // Create the generic Result interface
 interface Result<T> {
-    success: boolean,
-    data: T
+  success: boolean;
+  data: T;
 }
 // Create the objects using the Result interface
 const stringResult: Result<string> = {
-    success: true,
-    data: "Operation completed"
-}
+  success: true,
+  data: 'Operation completed',
+};
 
 const numberResult: Result<number> = {
-    success: true,
-    data: 42
-}
+  success: true,
+  data: 42,
+};
 
 const booleanResult: Result<boolean> = {
-    success: false,
-    data: false
-}
+  success: false,
+  data: false,
+};
 
 const arrayResult: Result<string[]> = {
-    success: true,
-    data: ["item1", "item2", "item3"]
-}
+  success: true,
+  data: ['item1', 'item2', 'item3'],
+};
 // Create the generic processResult function
-const processResult = <T> (result: Result<T>): string => result.success ? `Success: ${result.data}` : `Failed: ${result.data}`;
+const processResult = <T>(result: Result<T>): string =>
+  result.success ? `Success: ${result.data}` : `Failed: ${result.data}`;
 // Print the required outputs
 console.log(processResult(stringResult));
 console.log(processResult(numberResult));
