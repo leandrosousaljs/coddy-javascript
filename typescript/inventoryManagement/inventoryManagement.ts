@@ -70,6 +70,39 @@ Print updatedElectronicInventory[1].details.brand
 Print updatedElectronicInventory[1].details.model
 Print updatedElectronicInventory[0].id
 Print updatedElectronicInventory[1].quantity
+
+3.You are provided with the following from the previous challenge:
+
+The generic interface InventoryItem<T> with properties id, quantity, and details
+The generic function addItem that adds items to inventory arrays
+Various inventory items and updated inventory arrays
+Create a generic function named findItemById that searches for an item in an inventory array by its ID.
+
+The function should:
+
+Use a generic type parameter T
+Accept a parameter inventory of type InventoryItem<T>[]
+Accept a parameter id of type number
+Return the found item of type InventoryItem<T> or undefined if not found
+Have an explicit return type annotation of InventoryItem<T> | undefined
+Create test inventories:
+
+Create mixedBookInventory as an array containing:
+An item with id: 10, quantity: 3, details: { title: "JavaScript Basics", author: "Alice Brown" }
+An item with id: 11, quantity: 7, details: { title: "React Fundamentals", author: "Bob Wilson" }
+An item with id: 12, quantity: 2, details: { title: "Node.js Guide", author: "Carol Davis" }
+Create mixedElectronicInventory as an array containing:
+An item with id: 20, quantity: 5, details: { brand: "Samsung", model: "Galaxy S23" }
+An item with id: 21, quantity: 1, details: { brand: "Apple", model: "iPhone 15" }
+Test your function and print the following outputs:
+
+Find item with ID 11 in mixedBookInventory and print the result's details.title (or undefined if not found)
+Find item with ID 20 in mixedElectronicInventory and print the result's details.brand (or undefined if not found)
+Find item with ID 99 in mixedBookInventory and print the result (should be undefined)
+Find item with ID 12 in mixedBookInventory and print the result's quantity (or undefined if not found)
+Find item with ID 21 in mixedElectronicInventory and print the result's details.model (or undefined if not found)
+Find item with ID 10 in mixedBookInventory and print the result's id (or undefined if not found)
+Find item with ID 50 in mixedElectronicInventory and print the result (should be undefined)
 */
 
 // TODO: Write your code here
@@ -121,12 +154,45 @@ const newElectronic: InventoryItem<{ brand: string; model: string }> = {
 };
 
 const updatedElectronicInventory = addItem(electronicInventory, newElectronic);
+
+const findItemById = <T>(inventory: InventoryItem<T>[], id: number): InventoryItem<T> | undefined =>
+  inventory.find(item => item.id === id);
+
+const mixedBookInventory: InventoryItem<{ title: string; author: string }>[] = [
+  {
+    id: 10,
+    quantity: 3,
+    details: { title: 'JavaScript Basics', author: 'Alice Brown' },
+  },
+  {
+    id: 11,
+    quantity: 7,
+    details: { title: 'React Fundamentals', author: 'Bob Wilson' },
+  },
+  {
+    id: 12,
+    quantity: 2,
+    details: { title: 'Node.js Guide', author: 'Carol Davis' },
+  },
+];
+
+const mixedElectronicInventory: InventoryItem<{ brand: string; model: string }>[] = [
+  {
+    id: 20,
+    quantity: 5,
+    details: { brand: 'Samsung', model: 'Galaxy S23' },
+  },
+  {
+    id: 21,
+    quantity: 5,
+    details: { brand: 'Apple', model: 'iPhone 15' },
+  },
+];
 // Print the required outputs
-console.log(updatedBookInventory.length);
-console.log(updatedBookInventory[1].details.title);
-console.log(updatedBookInventory[1].details.author);
-console.log(updatedElectronicInventory.length);
-console.log(updatedElectronicInventory[1].details.brand);
-console.log(updatedElectronicInventory[1].details.model);
-console.log(updatedElectronicInventory[0].id);
-console.log(updatedElectronicInventory[1].quantity);
+console.log(findItemById(mixedBookInventory, 11).details.title);
+console.log(findItemById(mixedElectronicInventory, 20).details.brand);
+console.log(findItemById(mixedBookInventory, 99));
+console.log(findItemById(mixedBookInventory, 12).quantity);
+console.log(findItemById(mixedElectronicInventory, 21).details.model);
+console.log(findItemById(mixedBookInventory, 10).id);
+console.log(findItemById(mixedElectronicInventory, 50));
