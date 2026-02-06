@@ -33,11 +33,7 @@ Print electronicItem.details.model
 Print clothingItem.details.size
 Print clothingItem.details.color 
 
-2.You are provided with the following from the previous challenge:
-
-The generic interface InventoryItem<T> with properties id, quantity, and details
-Three inventory items: bookItem, electronicItem, and clothingItem
-Create a generic function named addItem that adds a new item to an existing inventory array.
+2.Create a generic function named addItem that adds a new item to an existing inventory array.
 
 The function should:
 
@@ -71,12 +67,7 @@ Print updatedElectronicInventory[1].details.model
 Print updatedElectronicInventory[0].id
 Print updatedElectronicInventory[1].quantity
 
-3.You are provided with the following from the previous challenge:
-
-The generic interface InventoryItem<T> with properties id, quantity, and details
-The generic function addItem that adds items to inventory arrays
-Various inventory items and updated inventory arrays
-Create a generic function named findItemById that searches for an item in an inventory array by its ID.
+3.Create a generic function named findItemById that searches for an item in an inventory array by its ID.
 
 The function should:
 
@@ -103,6 +94,50 @@ Find item with ID 12 in mixedBookInventory and print the result's quantity (or u
 Find item with ID 21 in mixedElectronicInventory and print the result's details.model (or undefined if not found)
 Find item with ID 10 in mixedBookInventory and print the result's id (or undefined if not found)
 Find item with ID 50 in mixedElectronicInventory and print the result (should be undefined)
+
+4.Create two specific object types and their corresponding inventory item type aliases:
+
+Create a type alias Book with properties:
+title of type string
+author of type string
+Create a type alias Electronic with properties:
+brand of type string
+model of type string
+Create type aliases for specific inventory items:
+
+Create BookItem as InventoryItem<Book>
+Create ElectronicItem as InventoryItem<Electronic>
+Create concrete inventory items using your new type aliases:
+
+Create specificBook of type BookItem with:
+id: 100
+quantity: 8
+details: { title: "Clean Code", author: "Robert Martin" }
+Create specificElectronic of type ElectronicItem with:
+id: 200
+quantity: 4
+details: { brand: "Sony", model: "WH-1000XM4" }
+Create typed inventory arrays:
+
+Create bookStore of type BookItem[] containing specificBook
+Create electronicStore of type ElectronicItem[] containing specificElectronic
+Create additional items and test your type system:
+
+Create anotherBook of type BookItem with:
+id: 101
+quantity: 3
+details: { title: "Design Patterns", author: "Gang of Four" }
+Use addItem to add anotherBook to bookStore and store in expandedBookStore
+Print the following outputs:
+
+Print specificBook.details.title
+Print specificBook.details.author
+Print specificElectronic.details.brand
+Print specificElectronic.details.model
+Print the length of expandedBookStore
+Use findItemById to find item with ID 101 in expandedBookStore and print the result's details.title
+Use findItemById to find item with ID 200 in electronicStore and print the result's quantity
+Print expandedBookStore[1].details.author
 */
 
 // TODO: Write your code here
@@ -112,6 +147,20 @@ interface InventoryItem<T> {
   quantity: number;
   details: T;
 }
+
+type Book = {
+  title: string;
+  author: string;
+};
+
+type Electronic = {
+  brand: string;
+  model: string;
+};
+
+type BookItem = InventoryItem<Book>;
+
+type ElectronicItem = InventoryItem<Electronic>;
 
 const bookItem: InventoryItem<{ title: string; author: string }> = {
   id: 1,
@@ -188,11 +237,35 @@ const mixedElectronicInventory: InventoryItem<{ brand: string; model: string }>[
     details: { brand: 'Apple', model: 'iPhone 15' },
   },
 ];
+
+const specificBook: BookItem = {
+  id: 100,
+  quantity: 8,
+  details: { title: 'Clean Code', author: 'Robert Martin' },
+};
+
+const specificElectronic: ElectronicItem = {
+  id: 200,
+  quantity: 4,
+  details: { brand: 'Sony', model: 'WH-1000XM4' },
+};
+
+const bookStore: BookItem[] = [specificBook];
+const electronicStore: ElectronicItem[] = [specificElectronic];
+
+const anotherBook: BookItem = {
+  id: 101,
+  quantity: 3,
+  details: { title: 'Design Patterns', author: 'Gang of Four' },
+};
+
+const expandedBookStore = addItem(bookStore, anotherBook);
 // Print the required outputs
-console.log(findItemById(mixedBookInventory, 11).details.title);
-console.log(findItemById(mixedElectronicInventory, 20).details.brand);
-console.log(findItemById(mixedBookInventory, 99));
-console.log(findItemById(mixedBookInventory, 12).quantity);
-console.log(findItemById(mixedElectronicInventory, 21).details.model);
-console.log(findItemById(mixedBookInventory, 10).id);
-console.log(findItemById(mixedElectronicInventory, 50));
+console.log(specificBook.details.title);
+console.log(specificBook.details.author);
+console.log(specificElectronic.details.brand);
+console.log(specificElectronic.details.model);
+console.log(expandedBookStore.length);
+console.log(findItemById(expandedBookStore, 101).details.title);
+console.log(findItemById(electronicStore, 200).quantity);
+console.log(expandedBookStore[1].details.author);
