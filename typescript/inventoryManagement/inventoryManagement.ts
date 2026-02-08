@@ -178,153 +178,153 @@ Use findItemById to find item with ID 200 in electronicStore, then call getItemD
 // TODO: Write your code here
 // Create the InventoryItem interface and the required objects
 interface InventoryItem<T> {
-    id: number,
-    quantity: number,
-    details: T
+  id: number;
+  quantity: number;
+  details: T;
 }
 
 type Book = {
-    title: string,
-    author: string,
-}
+  title: string;
+  author: string;
+};
 
 type Electronic = {
-    brand: string,
-    model: string
-}
+  brand: string;
+  model: string;
+};
 
 type BookItem = InventoryItem<Book>;
 
 type ElectronicItem = InventoryItem<Electronic>;
 
 const bookItem: InventoryItem<{ title: string; author: string }> = {
-    id: 1,
-    quantity: 5,
-    details: { title: "TypeScript Guide", author: "John Doe" }
-}
+  id: 1,
+  quantity: 5,
+  details: { title: 'TypeScript Guide', author: 'John Doe' },
+};
 
 const electronicItem: InventoryItem<{ brand: string; model: string }> = {
-    id: 2,
-    quantity: 3,
-    details: { brand: "TechCorp", model: "X200" }
-}
+  id: 2,
+  quantity: 3,
+  details: { brand: 'TechCorp', model: 'X200' },
+};
 
 const clothingItem: InventoryItem<{ size: string; color: string }> = {
-    id: 3,
-    quantity: 10,
-    details: { size: "M", color: "Blue" }
-}
+  id: 3,
+  quantity: 10,
+  details: { size: 'M', color: 'Blue' },
+};
 
-const addItem = <T> (inventory: InventoryItem<T>[], newItem: InventoryItem<T>): InventoryItem<T>[] => {
-    return [...inventory, newItem];
-}
+const addItem = <T>(inventory: InventoryItem<T>[], newItem: InventoryItem<T>): InventoryItem<T>[] => {
+  return [...inventory, newItem];
+};
 
 const bookInventory = [bookItem];
 
 const newBook: InventoryItem<{ title: string; author: string }> = {
-    id: 4,
-    quantity: 2,
-    details: { title: "Advanced TypeScript", author: "Jane Smith" }
-}
+  id: 4,
+  quantity: 2,
+  details: { title: 'Advanced TypeScript', author: 'Jane Smith' },
+};
 
 const updatedBookInventory = addItem(bookInventory, newBook);
 
 const electronicInventory = [electronicItem];
 
 const newElectronic: InventoryItem<{ brand: string; model: string }> = {
-    id: 5,
-    quantity: 1,
-    details: { brand: "GadgetCorp", model: "Z500" }
-}
+  id: 5,
+  quantity: 1,
+  details: { brand: 'GadgetCorp', model: 'Z500' },
+};
 
 const updatedElectronicInventory = addItem(electronicInventory, newElectronic);
 
 const findItemById = <T>(inventory: InventoryItem<T>[], id: number): InventoryItem<T> | undefined =>
   inventory.find(item => item.id === id);
 
-const mixedBookInventory: InventoryItem<{title: string, author: string}>[] = [{
+const mixedBookInventory: InventoryItem<{ title: string; author: string }>[] = [
+  {
     id: 10,
     quantity: 3,
-    details: { title: "JavaScript Basics", author: "Alice Brown" }
-},
-{
+    details: { title: 'JavaScript Basics', author: 'Alice Brown' },
+  },
+  {
     id: 11,
     quantity: 7,
-    details: { title: "React Fundamentals", author: "Bob Wilson" }
-},
-{
+    details: { title: 'React Fundamentals', author: 'Bob Wilson' },
+  },
+  {
     id: 12,
     quantity: 2,
-    details: { title: "Node.js Guide", author: "Carol Davis" }
-}
-]
+    details: { title: 'Node.js Guide', author: 'Carol Davis' },
+  },
+];
 
-const mixedElectronicInventory: InventoryItem<{brand: string, model: string}>[] = [
-    {
-        id: 20,
-        quantity: 5,
-        details: { brand: "Samsung", model: "Galaxy S23" }
-    },
-    {
-        id: 21,
-        quantity: 5,
-        details: { brand: "Apple", model: "iPhone 15" }
-    }
-]
+const mixedElectronicInventory: InventoryItem<{ brand: string; model: string }>[] = [
+  {
+    id: 20,
+    quantity: 5,
+    details: { brand: 'Samsung', model: 'Galaxy S23' },
+  },
+  {
+    id: 21,
+    quantity: 5,
+    details: { brand: 'Apple', model: 'iPhone 15' },
+  },
+];
 
 const specificBook: BookItem = {
-    id: 100,
-    quantity: 8,
-    details: { title: "Clean Code", author: "Robert Martin" }
-}
+  id: 100,
+  quantity: 8,
+  details: { title: 'Clean Code', author: 'Robert Martin' },
+};
 
 const specificElectronic: ElectronicItem = {
-    id: 200,
-    quantity: 4,
-    details: { brand: "Sony", model: "WH-1000XM4" }
-}
+  id: 200,
+  quantity: 4,
+  details: { brand: 'Sony', model: 'WH-1000XM4' },
+};
 
 const bookStore: BookItem[] = [specificBook];
 const electronicStore: ElectronicItem[] = [specificElectronic];
 
 const anotherBook: BookItem = {
-    id: 101,
-    quantity: 3,
-    details: { title: "Design Patterns", author: "Gang of Four" }
-}
+  id: 101,
+  quantity: 3,
+  details: { title: 'Design Patterns', author: 'Gang of Four' },
+};
 
 const expandedBookStore = addItem(bookStore, anotherBook);
 
 const getItemDetails = (item: InventoryItem<any>): void => {
-    if ('title' in item.details) {
-        return console.log(`Book: ${item.details.title} by ${item.details.author}`)
+  if ('title' in item.details) {
+    return console.log(`Book: ${item.details.title} by ${item.details.author}`);
+  }
 
-    }
+  if ('brand' in item.details) {
+    return console.log(`Electronic: ${item.details.brand} ${item.details.model}`);
+  }
 
-    if ('brand' in item.details) {
-        return console.log(`Electronic: ${item.details.brand} ${item.details.model}`)
-    }
-
-    return console.log("Unknown item type");
-}
+  return console.log('Unknown item type');
+};
 
 const testBook: InventoryItem<any> = {
-    id: 300,
-    quantity: 6,
-    details: { title: "TypeScript Handbook", author: "Microsoft Team" }
-}
+  id: 300,
+  quantity: 6,
+  details: { title: 'TypeScript Handbook', author: 'Microsoft Team' },
+};
 
 const testElectronic: InventoryItem<any> = {
-    id: 400,
-    quantity: 2,
-    details: { brand: "Dell", model: "XPS 13" }
-}
+  id: 400,
+  quantity: 2,
+  details: { brand: 'Dell', model: 'XPS 13' },
+};
 
 const unknownItem: InventoryItem<any> = {
-    id: 500,
-    quantity: 1,
-    details: { color: "Red", size: "Large" }
-}
+  id: 500,
+  quantity: 1,
+  details: { color: 'Red', size: 'Large' },
+};
 
 // Print the required outputs
 getItemDetails(testBook);
