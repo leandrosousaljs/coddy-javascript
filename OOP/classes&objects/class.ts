@@ -4,8 +4,10 @@ Create a class named Car with a constructor that takes two parameters: make and 
 
 // TODO: Create a class named Car
 class Car {
+  make: string;
+  model: string;
   // TODO: Add a constructor that takes two parameters: make and model
-  constructor(make, model) {
+  constructor(make: string, model: string) {
     // TODO: Set these values (make and model) as properties of the object
     this.make = make;
     this.model = model;
