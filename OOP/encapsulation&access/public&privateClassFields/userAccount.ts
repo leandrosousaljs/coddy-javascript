@@ -1,3 +1,10 @@
+/* Challenge
+
+Add two fields into the class named UserAccount:
+A public field username
+A private field #password
+Add a constructor that takes username and password parameters */
+
 export class UserAccount {
   // TODO: Add a public field username
   username: string = '';
