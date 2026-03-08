@@ -25,66 +25,62 @@ If valid:
 Adds the amount to the balance
 Logs exactly: Deposited $${amount}
 If invalid: Logs exactly: Invalid deposit amount
+
 2. withdraw(amount) method:
 
 Checks if the amount is positive AND less than or equal to current balance
 If valid:
 Subtracts the amount from the balance
 Logs exactly: Withdrew $${amount}
-If invalid: Logs exactly: Invalid withdrawal amount or insufficient funds */
+If invalid: Logs exactly: Invalid withdrawal amount or insufficient funds
 
-// TODO: Create a class named BankAccount
+3.Let's make the BankAccount class more secure by converting the balance to a private field."
+
+Your task:
+
+Add #balance at the top of the class
+Change this.balance to this.#balance in the constructor
+Change this.balance to this.#balance in all methods
+*/
+
 export class BankAccount {
+  // TODO: Add a private field called #balance
   accountHolder: string;
-  balance: number;
-  // TODO: Add a constructor that takes two parameters: accountHolder and initialBalance (defaults to 0)
+  #balance: number;
+
+  // TODO: Change this.balance to this.#balance
   constructor(accountHolder: string, initialBalance: number = 0) {
     this.accountHolder = accountHolder;
-    this.balance = initialBalance;
+    this.#balance = initialBalance;
   }
-  // TODO: Add a method getBalance() that returns the current account balance
+
+  // TODO: Change this.balance to this.#balance in the getBalance() method
   getBalance() {
-    return this.balance;
+    return this.#balance;
   }
 
+  // TODO: Change this.balance to this.#balance in the getAccountInfo() method
   getAccountInfo() {
-    return `${this.accountHolder}: $${this.balance}`;
+    return `${this.accountHolder}: $${this.#balance}`;
   }
 
-  // TODO: Add the deposit(amount) method
+  // TODO: Change this.balance to this.#balance in the deposit(amount) method
   deposit(amount: number) {
-    // TODO: The method should check if the amount is positive (greater than 0)
     if (amount > 0) {
-      // TODO: If valid: Adds the amount to the balance and logs: Deposited $${amount},
-      this.balance += amount;
+      this.#balance += amount;
       console.log(`Deposited $${amount}`);
     } else {
-      // otherwise logs: Invalid deposit amount
-
-      console.log('Invalid deposit amount');
+      console.log(`Invalid deposit amount`);
     }
   }
 
-  // TODO: Add the withdraw(amount) method
+  // TODO: Change this.balance to this.#balance in the withdraw(amount) method
   withdraw(amount: number) {
-    // TODO: The method should check if the amount is positive AND less than or equal to current balance
-    if (amount > 0 && amount <= this.balance) {
-      // TODO: If valid: Subtracts the amount from the balance and logs: Withdrew $${amount},
-      this.balance -= amount;
+    if (amount > 0 && amount <= this.#balance) {
+      this.#balance -= amount;
       console.log(`Withdrew $${amount}`);
     } else {
-      // otherwise logs: Invalid withdrawal amount or insufficient funds
-
-      console.log('Invalid withdrawal amount or insufficient funds');
+      console.log(`Invalid withdrawal amount or insufficient funds`);
     }
   }
 }
-
-// TODO: Add a method getAccountInfo() that returns a formatted string: "${accountHolder}: $${balance}"
-
-// Test
-const testAccount = new BankAccount('Alex Johnson', 500);
-
-console.log('Initial state:');
-console.log(testAccount.getAccountInfo()); // "Alex Johnson: $500"
-console.log('Balance:', testAccount.getBalance()); // 500
