@@ -1,6 +1,6 @@
 /* Challenge
 
-In this project, we'll build a simple shape rendering system that demonstrates key Object-Oriented Programming concepts. We'll create different shapes that can describe themselves, practice inheritance, and organize our code using modules.
+1.In this project, we'll build a simple shape rendering system that demonstrates key Object-Oriented Programming concepts. We'll create different shapes that can describe themselves, practice inheritance, and organize our code using modules.
 
 Your task:
 

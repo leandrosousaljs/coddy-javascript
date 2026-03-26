@@ -2,9 +2,10 @@
 import { Shape } from './Shape.js';
 import { Circle } from './Circle.js';
 
-// Test the Shape class
-const myShape = new Shape('blue');
-console.log(myShape.describe()); // Outputs: "A blue shape"
+// Tests
+const basicShape = new Shape('red');
+console.log(basicShape.describe()); // "A red shape"
 
 const myCircle = new Circle('blue', 10);
-console.log(myCircle.describe()); // Should output: "A blue shape"
+console.log(myCircle.describe()); // Should output: "A blue shape (Circle with radius 10)"
+console.log(myCircle.calculateArea()); // Should output: "314.1592653589793"
