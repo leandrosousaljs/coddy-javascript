@@ -13,13 +13,22 @@ In main.js, import the class using: import { Shape } from './Shape.js'; */
 // TODO: Create a Shape class
 // TODO: Export the class using export
 export class Shape {
+  // TODO: Add a static property called totalShapes initialized to 0
   color: string;
-  // TODO: Add a constructor that takes one parameter: color
+  static totalShapes: number = 0;
+
   constructor(color: string) {
     this.color = color;
+    // TODO: Increment the counter in the constructor: Shape.totalShapes++;
+    Shape.totalShapes++;
   }
-  // TODO: Add a method called describe() that returns: "A ${color} shape"
+
   describe() {
     return `A ${this.color} shape`;
+  }
+
+  // TODO: Add a static method called getTotalCreated() that returns the current count of total shapes
+  static getTotalCreated() {
+    return Shape.totalShapes;
   }
 }

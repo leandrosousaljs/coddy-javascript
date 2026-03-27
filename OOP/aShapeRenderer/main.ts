@@ -3,9 +3,11 @@ import { Shape } from './Shape.js';
 import { Circle } from './Circle.js';
 
 // Tests
-const basicShape = new Shape('red');
-console.log(basicShape.describe()); // "A red shape"
+console.log(`Initial count: ${Shape.getTotalCreated()}`); // Should be 0
 
-const myCircle = new Circle('blue', 10);
-console.log(myCircle.describe()); // Should output: "A blue shape (Circle with radius 10)"
-console.log(myCircle.calculateArea()); // Should output: "314.1592653589793"
+const shape1 = new Shape('red');
+const shape2 = new Shape('green');
+const circle1 = new Circle('blue', 5);
+const circle2 = new Circle('yellow', 10);
+
+console.log(`After creating 4 shapes: ${Shape.getTotalCreated()}`); // Should be 4
