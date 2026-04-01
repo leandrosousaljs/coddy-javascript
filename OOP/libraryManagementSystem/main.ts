@@ -1,9 +1,12 @@
 import { Author } from './Author.js';
-// TODO:  Import the Book class
 import { Book } from './Book.js';
-// Tests
-const author = new Author('J.K. Rowling');
-const book = new Book('Harry Potter', author);
 
-console.log('Book title:', book.title); // Should output: "Book title: Harry Potter"
-console.log('Author:', book.authorInfo); // Should output: "Author: J.K. Rowling"
+// Tests
+const rowling = new Author('J.K. Rowling');
+
+// Valid case (should work silently)
+const validBook = new Book('Harry Potter', rowling);
+console.log('Author:', validBook.authorInfo); // Should output: "Author: J.K. Rowling"
+
+// Invalid cases (should log message but still create book)
+const invalid1 = new Book('Fake Book', 'String Author');

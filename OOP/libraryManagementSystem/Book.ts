@@ -17,25 +17,35 @@ The Book contains an Author instance as one of its components
 The Author exists separately and can be used by multiple Books
 This is composition: building complex objects (Book) from simpler ones (Author) */
 
-// TODO: Add import for Author class here
 import { Author } from './Author.js';
-// TODO: Create and export the Book class
-export class Book {
-  // TODO: Add the private fields: #title, #author, #isCheckedOut
-  #title: string;
-  #author: Author;
-  // TODO: Add a constructor method that takes title and author
-  constructor(title: string, author: Author) {
-    this.#title = title;
-    this.#author = author;
-  }
-  // TODO: Add a getter method called title that returns the title
 
+export class Book {
+  #title: string;
+  #author: Author | null; // Composition: Book HAS-AN Author
+  #isCheckedOut: boolean = false;
+
+  constructor(title:string , author: Author) {
+    this.#title = title;
+
+    // TODO: Check if the author is valid (an instance of Author class)
+    // use author instanceof Author
+    if (author instanceof Author) {
+      // TODO: If the author is valid, set this.#author to author
+      this.#author = author;
+    } else {
+      // TODO: Otherwise (author is invalid), log exactly: "Invalid author: must be Author instance"
+      console.log('Invalid author: must be Author instance');
+      // TODO: Set this.#author = null
+      this.#author = null;
+    }
+  }
+
+  // Getter for title (read-only)
   get title(): string {
     return this.#title;
   }
 
-  // TODO: Add a getter method called authorInfo that returns the author's name
+  // Getter for author info
   get authorInfo(): string {
     return this.#author.name;
   }
